@@ -33,55 +33,45 @@ endfunction
 
 //Run
 task ahb_err_test::run_phase(uvm_phase phase);
-            reset_vseq_h = ahb_reset_vseq::type_id::create("reset_vseq_h", this);
-            set_vseq_h = ahb_set_vseq::type_id::create("set_vseq_h", this);
-            err_vseq_h = ahb_err_vseq::type_id::create("err_vseq_h", this);
-            incrbusy_vseq_h = ahb_incrbusy_vseq::type_id::create("incrbusy_vseq_h", this);
-            ready_vseq_h = ahb_ready_vseq::type_id::create("ready_vseq_h", this);
-            idle_vseq_h = ahb_idle_vseq::type_id::create("idle_vseq_h", this);
-            phase.raise_objection(this);
 
-                    fork
-                            reset_vseq_h.start(env_h.vseqr_h);
-                            reset_vseq_h.start(env_h.vseqr_h);
-                            reset_vseq_h.start(env_h.vseqr_h);
-                            reset_vseq_h.start(env_h.vseqr_h);
-                            reset_vseq_h.start(env_h.vseqr_h);
-                            set_vseq_h.start(env_h.vseqr_h);
-                    join_none
+    reset_vseq_h = ahb_reset_vseq::type_id::create("reset_vseq_h", this);
+    set_vseq_h = ahb_set_vseq::type_id::create("set_vseq_h", this);
+    err_vseq_h = ahb_err_vseq::type_id::create("err_vseq_h", this);
+    incrbusy_vseq_h = ahb_incrbusy_vseq::type_id::create("incrbusy_vseq_h", this);
+    ready_vseq_h = ahb_ready_vseq::type_id::create("ready_vseq_h", this);
+    idle_vseq_h = ahb_idle_vseq::type_id::create("idle_vseq_h", this);
 
-                    fork
-                            ready_vseq_h.start(env_h.vseqr_h);
-                    join_none
-                    incrbusy_vseq_h.start(env_h.vseqr_h);
-                    incrbusy_vseq_h.start(env_h.vseqr_h);
-                    incrbusy_vseq_h.start(env_h.vseqr_h);
+    phase.raise_objection(this);
 
-                    err_vseq_h.start(env_h.vseqr_h);
+    repeat(10)
+        reset_vseq_h.start(env_h.vseqr_h);
 
-                    fork
-                            ready_vseq_h.start(env_h.vseqr_h);
-                    join_none
-                    incrbusy_vseq_h.start(env_h.vseqr_h);
+    set_vseq_h.start(env_h.vseqr_h);
 
-                    fork
-                            ready_vseq_h.start(env_h.vseqr_h);
-                    join_none
-                    incrbusy_vseq_h.start(env_h.vseqr_h);
+    fork
+            ready_vseq_h.start(env_h.vseqr_h);
+    join_none
 
-                    err_vseq_h.start(env_h.vseqr_h);
+    incrbusy_vseq_h.start(env_h.vseqr_h);
+    incrbusy_vseq_h.start(env_h.vseqr_h);
+    incrbusy_vseq_h.start(env_h.vseqr_h);
 
-                    repeat(5)
-                    begin
-                            fork
-                                    ready_vseq_h.start(env_h.vseqr_h);
-                            join_none
+    err_vseq_h.start(env_h.vseqr_h);
 
-                            incrbusy_vseq_h.start(env_h.vseqr_h);
-                    end
+    incrbusy_vseq_h.start(env_h.vseqr_h);
 
-                    idle_vseq_h.start(env_h.vseqr_h);
-                    #100;
-            phase.drop_objection(this);
+    incrbusy_vseq_h.start(env_h.vseqr_h);
+
+    err_vseq_h.start(env_h.vseqr_h);
+
+    repeat(5)
+    begin
+            incrbusy_vseq_h.start(env_h.vseqr_h);
+    end
+
+    idle_vseq_h.start(env_h.vseqr_h);
+    #100;
+
+    phase.drop_objection(this);
 
 endtask

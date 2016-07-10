@@ -33,30 +33,33 @@ endfunction
 
 //Run
 task ahb_incrx_test::run_phase(uvm_phase phase);
+
         reset_vseq_h = ahb_reset_vseq::type_id::create("reset_vseq_h", this);
         set_vseq_h = ahb_set_vseq::type_id::create("set_vseq_h", this);
         incrx_vseq_h = ahb_incrx_vseq::type_id::create("incrx_vseq_h", this);
         ready_vseq_h = ahb_ready_vseq::type_id::create("ready_vseq_h", this);
         idle_vseq_h = ahb_idle_vseq::type_id::create("idle_vseq_h", this);
+
         phase.raise_objection(this);
 
-                fork
-                //      repeat(5)
-                                reset_vseq_h.start(env_h.vseqr_h);
-                        set_vseq_h.start(env_h.vseqr_h);
-                join_none
+        fork
+        //      repeat(5)
+                        reset_vseq_h.start(env_h.vseqr_h);
+                set_vseq_h.start(env_h.vseqr_h);
+        join_none
 
-                repeat(10)
-                begin
-                        fork
-                                ready_vseq_h.start(env_h.vseqr_h);
-                        join_none
+        fork
+                ready_vseq_h.start(env_h.vseqr_h);
+        join_none
 
-                        incrx_vseq_h.start(env_h.vseqr_h);
-                end
+        repeat(10)
+        begin
+                incrx_vseq_h.start(env_h.vseqr_h);
+        end
 
-                idle_vseq_h.start(env_h.vseqr_h);
-                #100;
+        idle_vseq_h.start(env_h.vseqr_h);
+        #100;
+
         phase.drop_objection(this);
 endtask
 

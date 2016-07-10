@@ -166,16 +166,16 @@ class ahb_incrbusy_mseq extends ahb_mbase_seq;
 
 endclass: ahb_incrbusy_mseq
 
-        //Constructor
-        function ahb_incrbusy_mseq::new(string name = "ahb_incrbusy_mseq");
-                super.new(name);
-        endfunction
+//Constructor
+function ahb_incrbusy_mseq::new(string name = "ahb_incrbusy_mseq");
+        super.new(name);
+endfunction
 
-        //Body
-        task ahb_incrbusy_mseq::body();
-                req = ahb_mxtn::type_id::create("req");
-                start_item(req);
-                        assert(req.randomize() with {((burst_mode == INCR)&&(address.size < 20)&&(no_of_busy == 1));} );
-                finish_item(req);
-        endtask
+//Body
+task ahb_incrbusy_mseq::body();
+        req = ahb_mxtn::type_id::create("req");
+        start_item(req);
+                assert(req.randomize() with {((burst_mode == INCR)&&(address.size < 20)&&(no_of_busy == 1));} );
+        finish_item(req);
+endtask
                              

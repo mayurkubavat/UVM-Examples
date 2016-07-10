@@ -78,7 +78,7 @@ sub library(){
 
 
 sub compile(){
-    system "vlog -work $WORK -f ahb_inc.f";
+    system "vlog -work $WORK -f ahb_inc.f +define+UVM_NO_DPI";
 }
 
 

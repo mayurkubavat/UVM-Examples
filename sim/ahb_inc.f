@@ -1,3 +1,6 @@
++incdir+$UVM_HOME
+$UVM_HOME/uvm_pkg.sv
+
 +incdir+../rtl
 +incdir+../ahb_env
 +incdir+../ahb_test
