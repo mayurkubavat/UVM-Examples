@@ -1,6 +1,6 @@
-reset_test
-crt_test
-incrx_test
-wrapx_test
-incrbusy_test
-err_test
+ahb_reset_test
+ahb_crt_test
+ahb_incrx_test
+ahb_wrapx_test
+ahb_incrbusy_test
+ahb_err_test
