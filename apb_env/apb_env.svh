@@ -16,9 +16,14 @@ class apb_env extends uvm_env;
     apb_subscriber apb_subscriber_h;
 
 
-    apb_bridge apb_bridge_h;
+    apb_bridge  apb_bridge_h;
+    apb_slave   apb_slave_h;
+    reset_agent reset_agent_h;
 
-    apb_slave apb_slave_h;
+
+    apb_seqr    m_bridge_seqr_h;
+    apb_seqr    m_slave_seqr_h;
+    reset_seqr  reset_seqr_h;
 
 
     //
@@ -41,15 +46,33 @@ class apb_env extends uvm_env;
             apb_subscriber_h = apb_subscriber::type_id::create("apb_subscriber_h", this);
         end
 
+        //Set master agent(APB Bridge) configuration       
+        m_bridge_cfg = apb_bridge_config::type_id::create("m_bridge_cfg");
+        m_bridge_cfg.apb_intf = m_env_cfg.apb_intf;
+        m_bridge_cfg.is_active = m_env_cfg.bridge_is_active;
+        uvm_config_db#(apb_bridge_config)::set(this, "apb_bridge*", "apb_bridge_config", m_bridge_cfg);
+
+        //Set slave agent(APB Slave) configuration       
+        m_slave_cfg = apb_slave_config::type_id::create("m_slave_cfg");
+        m_slave_cfg.apb_intf = m_env_cfg.apb_intf;
+        m_slave_cfg.is_active = m_env_cfg.slave_is_active;
+        uvm_config_db#(apb_slave_config)::set(this, "apb_slave*", "apb_slave_config", m_slave_cfg);
+
+
         apb_bridge_h = apb_bridge::type_id::create("apb_bridge_h", this);
 
         apb_slave_h = apb_slave::type_id::create("apb_slave_h", this);
+
+        reset_agent_h = reset_agent::type_id::create("reset_agent_h", this);
 
     endfunction //build_phase
 
 
     function void connect_phase(uvm_phase phase);
 
+        m_bridge_seqr_h = apb_bridge_h.m_bridge_seqr_h;
+        m_slave_seqr_h = apb_slave_h.m_slave_seqr_h;
+        reset_seqr_h = reset_agent_h.reset_seqr_h;
     endfunction //connect_phase
 
 endclass //apb_env

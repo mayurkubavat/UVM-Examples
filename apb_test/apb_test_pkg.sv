@@ -10,6 +10,7 @@ package apb_test_pkg;
     `include "apb_base_test.svh"
 
     `include "apb_init_test.svh"
+    `include "apb_reset_test.svh"
 
 
 

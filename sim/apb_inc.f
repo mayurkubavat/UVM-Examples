@@ -5,6 +5,7 @@ $UVM_HOME/uvm_pkg.sv
 
 +incdir+../apb_bridge
 +incdir+../apb_slave
++incdir+../reset_agent
 +incdir+../apb_env
 +incdir+../apb_test
 
