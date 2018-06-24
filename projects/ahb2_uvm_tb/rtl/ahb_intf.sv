@@ -45,7 +45,6 @@ interface ahb_intf(input logic HCLK);
                 input HWRITE;
                 input HADDR;
                 input HWDATA;
-                input HREADY;
                 input HRESP;
                 input HRDATA;
 
@@ -76,7 +75,6 @@ interface ahb_intf(input logic HCLK);
                 input HWRITE;
                 input HADDR;
                 input HWDATA;
-                input HREADY;
                 input HRESP;
                 input HRDATA;
 
