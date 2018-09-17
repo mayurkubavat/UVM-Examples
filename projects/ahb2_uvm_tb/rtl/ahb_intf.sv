@@ -91,23 +91,46 @@ interface ahb_intf(input logic HCLK);
 // SVA
 //-------------------------------------------------------------
 
+
+        // Second Cycle of HRESP should have HTRANS == IDLE to
+        // cancel data phase of previous transaction
+        
         //Error Response followed by Idle Trans
-        property err_p;
+        property idle_on_err_p;
                 @(posedge HCLK) disable iff(!HRESETn)
-                        (HRESP == 1) ##1 (HRESP == 1) |=> (HTRANS == 0);
+                        (HRESP == 1) ##1 (HRESP == 1) |-> (HTRANS == 0);
         endproperty
+        
+        IDLE_on_ERROR: 
+           assert property(idle_on_err_p)
+              else
+           $info("non-IDLE transaction detected on 2nd cycle of error response");
+
 
         //Split Response followed by Idle Trans
-        property split_p;
+        property idle_on_split_p;
                 @(posedge HCLK) disable iff(!HRESETn)
-                        (HRESP == 3) ##1 (HRESP == 3) |=> (HTRANS == 0);
+                        (HRESP == 3) ##1 (HRESP == 3) |-> (HTRANS == 0);
         endproperty
+        
+        IDLE_on_SPLIT:
+           assert property(idle_on_split_p)
+              else
+           $info("non-IDLE transaction detected on 2nd cycle of split response");
+
 
         //Retry Response followed by Idle Trans
-        property retry_p;
+        property idle_on_retry_p;
                 @(posedge HCLK) disable iff(!HRESETn)
-                        (HRESP == 2) ##1 (HRESP == 2) |=> (HTRANS == 0);
+                        (HRESP == 2) ##1 (HRESP == 2) |-> (HTRANS == 0);
         endproperty
+        
+        IDLE_on_RETRY:
+           assert property(idle_on_retry_p)
+              else
+           $info("non-IDLE transaction detected on 2nd cycle of retry response");
+
+
 
         //NONSEQ (BURST = 0) should not follow BUSY
         property no_busy_p;
@@ -259,9 +282,6 @@ interface ahb_intf(input logic HCLK);
         endproperty
 
 
-        ERROR: assert property(err_p);
-        RETRY: assert property(retry_p);
-        SPLIT: assert property(split_p);
         NO_BUSY: assert property(no_busy_p);
         BUSY_IDLE: assert property(busy_idle_p);
         IDLE_OK: assert property(idle_okay_p);

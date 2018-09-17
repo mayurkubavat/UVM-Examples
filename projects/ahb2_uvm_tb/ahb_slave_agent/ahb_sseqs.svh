@@ -31,30 +31,28 @@ endclass: ahb_sbase_seq
 
 class ahb_reset_sseq extends ahb_sbase_seq;
 
-        `uvm_object_utils(ahb_reset_sseq)
+   `uvm_object_utils(ahb_reset_sseq)
 
-        //-----------------------------------------------
-        // Methods
-        //-----------------------------------------------
+   //-----------------------------------------------
+   // Methods
+   //-----------------------------------------------
 
-        extern function new(string name = "ahb_reset_sseq");
-        extern task body();
+   extern function new(string name = "ahb_reset_sseq");
+   extern task body();
 
 endclass: ahb_reset_sseq
 
-        //Constructor
-        function ahb_reset_sseq::new(string name = "ahb_reset_sseq");
-                super.new(name);
-        endfunction
+function ahb_reset_sseq::new(string name = "ahb_reset_sseq");
+   super.new(name);
+endfunction
 
-        //Body
-        task ahb_reset_sseq::body();
-                req = ahb_sxtn::type_id::create("req");
-                start_item(req);
-                        assert(req.randomize() with { ready.size == 2;} )
-                        req.ready = '{1, 1};
-                finish_item(req);
-        endtask
+task ahb_reset_sseq::body();
+   req = ahb_sxtn::type_id::create("req");
+   start_item(req);
+      assert(req.randomize() with { ready.size == 2;} )
+      req.ready = '{1, 1};
+   finish_item(req);
+endtask
 
 
 //--------------------------------------------------------------
@@ -63,30 +61,28 @@ endclass: ahb_reset_sseq
 
 class ahb_ready_sseq extends ahb_sbase_seq;
 
-        `uvm_object_utils(ahb_ready_sseq)
+   `uvm_object_utils(ahb_ready_sseq)
 
 
-        //-----------------------------------------------
-        // Methods
-        //-----------------------------------------------
+   //-----------------------------------------------
+   // Methods
+   //-----------------------------------------------
 
-        extern function new(string name = "ahb_ready_sseq");
-        extern task body();
+   extern function new(string name = "ahb_ready_sseq");
+   extern task body();
 
 endclass: ahb_ready_sseq
 
-        //Constructor
-        function ahb_ready_sseq::new(string name = "ahb_ready_sseq");
-                super.new(name);
-        endfunction
+function ahb_ready_sseq::new(string name = "ahb_ready_sseq");
+   super.new(name);
+endfunction
 
-        //Body
-        task ahb_ready_sseq::body();
-                req = ahb_sxtn::type_id::create("req");
-                start_item(req);
-                        assert(req.randomize() with {response == OKAY;});
-                finish_item(req);
-        endtask
+task ahb_ready_sseq::body();
+   req = ahb_sxtn::type_id::create("req");
+   start_item(req);
+      assert(req.randomize() with {response == OKAY;});
+   finish_item(req);
+endtask
 
 
 //--------------------------------------------------------------
@@ -95,28 +91,31 @@ endclass: ahb_ready_sseq
 
 class ahb_err_sseq extends ahb_sbase_seq;
 
-        `uvm_object_utils(ahb_err_sseq)
+   `uvm_object_utils(ahb_err_sseq)
 
 
-        //-----------------------------------------------
-        // Methods
-        //-----------------------------------------------
+   //-----------------------------------------------
+   // Methods
+   //-----------------------------------------------
 
-        extern function new(string name = "ahb_err_sseq");
-        extern task body();
+   extern function new(string name = "ahb_err_sseq");
+   extern task body();
 
 endclass: ahb_err_sseq
 
-        //Constructor
-        function ahb_err_sseq::new(string name = "ahb_err_sseq");
-                super.new(name);
-        endfunction
+function ahb_err_sseq::new(string name = "ahb_err_sseq");
+   super.new(name);
+endfunction
 
-        //Body
-        task ahb_err_sseq::body();
-                req = ahb_sxtn::type_id::create("req");
-                start_item(req);
-                        assert(req.randomize() with {response == ERROR;} );
-                finish_item(req);
-        endtask
+task ahb_err_sseq::body();
+   req = ahb_sxtn::type_id::create("req");
+   start_item(req);
+      assert(req.randomize() with {response == ERROR;} );
+   finish_item(req);
+
+   req = ahb_sxtn::type_id::create("req");
+   start_item(req);
+      assert(req.randomize() with {response == OKAY;} );
+   finish_item(req);
+endtask
 
