@@ -12,7 +12,7 @@ class apb_xtn extends uvm_sequence_item;
     int unsigned apb_en_delay;
 
     bit apb_ready;
-    bit apb_slave_err;
+    bit apb_completer_err;
 
     typedef enum{APB_READ, APB_WRITE} apb_rd_wr_e;
 
@@ -28,7 +28,7 @@ class apb_xtn extends uvm_sequence_item;
         `uvm_field_int(apb_enable, UVM_DEFAULT)
         `uvm_field_int(apb_strobe, UVM_DEFAULT)
         `uvm_field_int(apb_ready, UVM_DEFAULT)
-        `uvm_field_int(apb_slave_err, UVM_DEFAULT)
+        `uvm_field_int(apb_completer_err, UVM_DEFAULT)
         `uvm_field_int(apb_prot, UVM_DEFAULT)
 
         `uvm_field_enum(apb_rd_wr_e, apb_rd_wr, UVM_DEFAULT)

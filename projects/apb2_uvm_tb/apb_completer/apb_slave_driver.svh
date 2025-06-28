@@ -1,10 +1,10 @@
-class apb_slave_driver extends uvm_driver#(apb_xtn);
+class apb_completer_driver extends uvm_driver#(apb_xtn);
 
-    `uvm_component_utils(apb_slave_driver)
+    `uvm_component_utils(apb_completer_driver)
 
     virtual apb_if apb_intf;
 
-    apb_slave_config slave_cfg_h;
+    apb_completer_config slave_cfg_h;
 
 
     //
@@ -17,7 +17,7 @@ class apb_slave_driver extends uvm_driver#(apb_xtn);
     endfunction //new
 
     function void build_phase(uvm_phase phase);
-        if(!uvm_config_db#(apb_slave_config)::get(this, "", "apb_slave_config", slave_cfg_h))
+        if(!uvm_config_db#(apb_completer_config)::get(this, "", "apb_completer_config", slave_cfg_h))
         begin
                 `uvm_fatal("APB/SLAVE/DRV", "Cannot get VIF from configuration database!")
         end
@@ -61,10 +61,10 @@ class apb_slave_driver extends uvm_driver#(apb_xtn);
 
     endtask //run_phase
 
-endclass //apb_slave_driver
+endclass //apb_completer_driver
 
 
-task apb_slave_driver::drive();
+task apb_completer_driver::drive();
 
     do
         repeat({$random}%10)

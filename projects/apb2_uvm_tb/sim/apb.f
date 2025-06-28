@@ -1,5 +1,5 @@
--i ../apb_bridge
--i ../apb_slave
+-i ../apb_requester
+-i ../apb_completer
 -i ../reset_agent
 -i ../apb_env
 -i ../apb_test

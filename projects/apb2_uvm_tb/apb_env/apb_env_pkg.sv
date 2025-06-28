@@ -8,21 +8,21 @@ package apb_env_pkg;
     `include "apb_xtn.svh"
     `include "reset_xtn.svh"
 
-    `include "apb_bridge_config.svh"
-    `include "apb_slave_config.svh"
+    `include "apb_requester_config.svh"
+    `include "apb_completer_config.svh"
 
     `include "apb_env_config.svh"
     `include "apb_seqr.svh"
     `include "reset_seqr.svh"
 
-    `include "apb_bridge_seqs.svh"
-    `include "apb_bridge_driver.svh"
-    `include "apb_bridge_monitor.svh"
-    `include "apb_bridge.svh"
+    `include "apb_requester_seqs.svh"
+    `include "apb_requester_driver.svh"
+    `include "apb_requester_monitor.svh"
+    `include "apb_requester.svh"
 
-    `include "apb_slave_driver.svh"
-    `include "apb_slave_monitor.svh"
-    `include "apb_slave.svh"
+    `include "apb_completer_driver.svh"
+    `include "apb_completer_monitor.svh"
+    `include "apb_completer.svh"
 
     
     

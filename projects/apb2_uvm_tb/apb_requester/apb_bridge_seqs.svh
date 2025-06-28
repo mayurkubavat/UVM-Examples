@@ -3,7 +3,7 @@
 // Author: Mayur Kubavat
  
 // Module: APB Sequence
-// Filename: apb_bridge_seqs.svh
+// Filename: apb_requester_seqs.svh
 
 
 class apb_base_seq extends uvm_sequence#(apb_xtn);

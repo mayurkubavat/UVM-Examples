@@ -1,10 +1,10 @@
-class apb_bridge_driver extends uvm_driver#(apb_xtn);
+class apb_requester_driver extends uvm_driver#(apb_xtn);
 
-    `uvm_component_utils(apb_bridge_driver)
+    `uvm_component_utils(apb_requester_driver)
 
     virtual apb_if apb_intf;
 
-    apb_bridge_config bridge_cfg_h;
+    apb_requester_config bridge_cfg_h;
 
     //
     //Methods
@@ -16,7 +16,7 @@ class apb_bridge_driver extends uvm_driver#(apb_xtn);
     endfunction //new
 
     function void build_phase(uvm_phase phase);
-        if(!uvm_config_db#(apb_bridge_config)::get(this, "", "apb_bridge_config", bridge_cfg_h))
+        if(!uvm_config_db#(apb_requester_config)::get(this, "", "apb_requester_config", bridge_cfg_h))
         begin
             `uvm_fatal("APB/BRIDGE/DRV", "Cannot get VIF from configuration database!")
         end
@@ -65,10 +65,10 @@ class apb_bridge_driver extends uvm_driver#(apb_xtn);
         join
     endtask //run_phase
 
-endclass //apb_bridge_driver
+endclass //apb_requester_driver
 
 
-task apb_bridge_driver::drive();
+task apb_requester_driver::drive();
 
     `uvm_info("APB/BRIDGE/DRV", "Transaction From APB Master Driver..", UVM_MEDIUM)
     req.print();

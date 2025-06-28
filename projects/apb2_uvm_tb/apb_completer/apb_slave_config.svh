@@ -1,6 +1,6 @@
-class apb_slave_config extends uvm_object;
+class apb_completer_config extends uvm_object;
 
-    `uvm_object_utils(apb_slave_config)
+    `uvm_object_utils(apb_completer_config)
 
     virtual apb_if apb_intf;
     uvm_active_passive_enum is_active = UVM_ACTIVE;
@@ -10,8 +10,8 @@ class apb_slave_config extends uvm_object;
     //
 
     //Constructor
-    function new(string name = "apb_slave_config");
+    function new(string name = "apb_completer_config");
         super.new(name);
     endfunction //new
 
-endclass //apb_slave_config
+endclass //apb_completer_config
