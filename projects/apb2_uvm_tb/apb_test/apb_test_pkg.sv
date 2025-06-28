@@ -1,17 +1,11 @@
 package apb_test_pkg;
+  `include "uvm_macros.svh"
 
-    `include "uvm_macros.svh"
+  import uvm_pkg::*;
+  import apb_env_pkg::*;
 
-    import uvm_pkg::*;
+  `include "apb_base_test.svh"
+  `include "apb_init_test.svh"
+  `include "apb_reset_test.svh"
 
-    import apb_env_pkg::*;
-
-
-    `include "apb_base_test.svh"
-
-    `include "apb_init_test.svh"
-    `include "apb_reset_test.svh"
-
-
-
-endpackage //apb_test_pkg
+endpackage: apb_test_pkg
